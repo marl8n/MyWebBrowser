@@ -1,0 +1,10 @@
+C:\Users\MIDP9\source\repos\MyWebBrowser\bin\Debug\MyWebBrowser.exe.config
+C:\Users\MIDP9\source\repos\MyWebBrowser\bin\Debug\MyWebBrowser.exe
+C:\Users\MIDP9\source\repos\MyWebBrowser\bin\Debug\MyWebBrowser.pdb
+C:\Users\MIDP9\source\repos\MyWebBrowser\obj\Debug\MyWebBrowser.csprojAssemblyReference.cache
+C:\Users\MIDP9\source\repos\MyWebBrowser\obj\Debug\MyWebBrowser.Form1.resources
+C:\Users\MIDP9\source\repos\MyWebBrowser\obj\Debug\MyWebBrowser.Properties.Resources.resources
+C:\Users\MIDP9\source\repos\MyWebBrowser\obj\Debug\MyWebBrowser.csproj.GenerateResource.cache
+C:\Users\MIDP9\source\repos\MyWebBrowser\obj\Debug\MyWebBrowser.csproj.CoreCompileInputs.cache
+C:\Users\MIDP9\source\repos\MyWebBrowser\obj\Debug\MyWebBrowser.exe
+C:\Users\MIDP9\source\repos\MyWebBrowser\obj\Debug\MyWebBrowser.pdb
