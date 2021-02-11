@@ -42,7 +42,16 @@ namespace MyWebBrowser
             WebBrowser web = tabMan.SelectedTab.Controls[0] as WebBrowser;
             if ( web != null )
             {
-                web.Navigate(textUrl.Text);
+                Regex isSearch = new Regex("^¿?([\\wáéíóú]+\\s?)+\\??$");
+                if (isSearch.IsMatch(textUrl.Text))
+                {
+                    web.Navigate($" http://www.google.com/search?q={textUrl.Text}");
+                }
+                else
+                {
+                    textUrl.Text = NormalizeUrl(textUrl.Text);
+                    web.Navigate(textUrl.Text);
+                }
             }
         }
 
