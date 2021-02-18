@@ -41,9 +41,12 @@ namespace MyWebBrowser.persistance
                 ws.WriteLine("<html>");
                 ws.WriteLine(head);
                 ws.WriteLine("<body>");
+                ws.WriteLine("<main class=\"links\">");
+                ws.WriteLine("<h1>Links</h1>");
                 urls.ForEach(url => {
                     ws.WriteLine($"<a href=\"{url}\">{url}</a>");
                 });
+                ws.WriteLine("</main>");
                 ws.WriteLine("</body>");
                 ws.WriteLine("</html>");
             }
