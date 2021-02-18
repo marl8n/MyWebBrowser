@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyWebBrowser.persistance;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,17 +19,19 @@ namespace MyWebBrowser
     {
 
         WebBrowser webTab = null;
-
-
+        History history = null;
+        WriteHtml writeHtml = null;
 
         public Form1()
         {
             InitializeComponent();
+            history = new History();
+            writeHtml = new WriteHtml();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            webBrowser.Navigate("https://www.google.com/");
+            webBrowser.Navigate("C:\\Users\\MIDP9\\source\\repos\\MyWebBrowser\\bin\\Debug\\links.html");
             webBrowser.DocumentCompleted += WebBrowser_DocumentCompleted;
         }
 
@@ -46,6 +49,7 @@ namespace MyWebBrowser
                 if (isSearch.IsMatch(textUrl.Text))
                 {
                     web.Navigate($" http://www.google.com/search?q={textUrl.Text}");
+                    webBrowser.DocumentCompleted += WebBrowser_DocumentCompleted;
                 }
                 else
                 {
@@ -53,6 +57,7 @@ namespace MyWebBrowser
                     web.Navigate(textUrl.Text);
                 }
             }
+            history.AddUrl(textUrl.Text);
         }
 
         private void btnNewTab_Click(object sender, EventArgs e)
@@ -100,18 +105,21 @@ namespace MyWebBrowser
                 if ( web != null )
                 {
                     Regex isSearch = new Regex("^¿?([\\wáéíóú]+\\s?)+\\??$");
-                    if (isSearch.IsMatch(textUrl.Text))
+                    if ( isSearch.IsMatch(textUrl.Text))
                     {
-                        web.Navigate($" http://www.google.com/search?q={textUrl.Text}");
+                        textUrl.Text = $" http://www.google.com/search?q={textUrl.Text}";
+                        web.Navigate(textUrl.Text);
                     }
                     else
                     {
                         textUrl.Text = NormalizeUrl(textUrl.Text);
                         web.Navigate(textUrl.Text);
-                    } 
-
-                }
+                    }
+                    history.AddUrl(textUrl.Text);
+                    
+                    }
             }   
         }
+
     }
 }
