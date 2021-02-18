@@ -31,7 +31,7 @@ namespace MyWebBrowser
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            webBrowser.Navigate("C:\\Users\\MIDP9\\source\\repos\\MyWebBrowser\\bin\\Debug\\links.html");
+            webBrowser.Navigate(System.AppContext.BaseDirectory  + "links.html");
             webBrowser.DocumentCompleted += WebBrowser_DocumentCompleted;
         }
 
