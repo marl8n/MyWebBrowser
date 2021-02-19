@@ -16,11 +16,12 @@ namespace MyWebBrowser.persistance
     <meta charset=""UTF-8"" />
     <meta name=""viewport"" content=""width=device-width, initial-scale=1.0""
     <style>
-    main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
     <title>History</title>
 </head>
