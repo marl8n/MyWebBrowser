@@ -1,4 +1,6 @@
-﻿using MyWebBrowser.persistance;
+﻿using MyWebBrowser.models;
+using MyWebBrowser.persistance;
+using MyWebBrowser.persistance.toFile;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,6 +35,14 @@ namespace MyWebBrowser
         {
             webBrowser.Navigate(System.AppContext.BaseDirectory  + "links.html");
             webBrowser.DocumentCompleted += WebBrowser_DocumentCompleted;
+
+            var list = new List<Visit>() { 
+                new Visit("This.com"),
+                new Visit("wtf.net")
+            };
+
+            binaries.Save("Data.xml", list);
+
         }
 
         private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
