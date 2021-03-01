@@ -20,7 +20,7 @@ namespace MyWebBrowser.persistance.toFile
                 {
                     jsonList = sr.ReadToEnd();
                 }
-                if (jsonList.Length < 0)
+                if (jsonList.Equals(""))
                 {
                     return null;
                 }

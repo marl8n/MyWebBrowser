@@ -79,7 +79,7 @@ namespace MyWebBrowser
                     web.GoBack();
                     textUrl.Text = webBrowser.Url.ToString();
                     history.AddUrl(textUrl.Text);
-                    loadUrls();
+                    loadUrls(history.VisitedUrls);
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace MyWebBrowser
                     webBrowser.GoForward();
                     textUrl.Text = webBrowser.Url.ToString();
                     history.AddUrl(textUrl.Text);
-                    loadUrls();
+                    loadUrls(history.VisitedUrls);
                 }
             }
         }
@@ -126,13 +126,37 @@ namespace MyWebBrowser
                 }
             }
             history.AddUrl(textUrl.Text);
-            loadUrls();
+            loadUrls(history.VisitedUrls);
         }
 
-        private void loadUrls()
+        private void loadUrls( List<Visit> visits )
         {
             textUrl.Items.Clear();
-            history.VisitedUrls.ForEach(visit => textUrl.Items.Add(visit.Url));
+            visits.ForEach(visit => textUrl.Items.Add(visit.Url));
+        }
+
+        private void btnVisitsAsc_Click(object sender, EventArgs e)
+        {
+            var list = history.VisitedUrls.OrderBy(visit => visit.TimesVisited).Reverse().ToList();
+            loadUrls(list);
+        }
+
+        private void btnVistsDesc_Click(object sender, EventArgs e)
+        {
+            var list = history.VisitedUrls.OrderBy(visit => visit.TimesVisited).ToList();
+            loadUrls(list);
+        }
+
+        private void btnDateAsc_Click(object sender, EventArgs e)
+        {
+            var list = history.VisitedUrls.OrderBy(visit => visit.LastVisit).Reverse().ToList();
+            loadUrls(list);
+        }
+
+        private void btnDateDesc_Click(object sender, EventArgs e)
+        {
+            var list = history.VisitedUrls.OrderBy(visit => visit.LastVisit).ToList();
+            loadUrls(list);
         }
     }
 }

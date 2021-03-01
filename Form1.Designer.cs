@@ -37,13 +37,17 @@ namespace MyWebBrowser
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.tabMan = new System.Windows.Forms.TabControl();
             this.textUrl = new System.Windows.Forms.ComboBox();
+            this.btnDateDesc = new System.Windows.Forms.Button();
+            this.btnDateAsc = new System.Windows.Forms.Button();
+            this.btnVistsDesc = new System.Windows.Forms.Button();
+            this.btnVisitsAsc = new System.Windows.Forms.Button();
             this.tabPage.SuspendLayout();
             this.tabMan.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(16, 15);
+            this.btnBack.Location = new System.Drawing.Point(16, 48);
             this.btnBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(48, 28);
@@ -54,7 +58,7 @@ namespace MyWebBrowser
             // 
             // btnForward
             // 
-            this.btnForward.Location = new System.Drawing.Point(72, 15);
+            this.btnForward.Location = new System.Drawing.Point(72, 48);
             this.btnForward.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnForward.Name = "btnForward";
             this.btnForward.Size = new System.Drawing.Size(48, 28);
@@ -66,7 +70,7 @@ namespace MyWebBrowser
             // btnGo
             // 
             this.btnGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGo.Location = new System.Drawing.Point(880, 15);
+            this.btnGo.Location = new System.Drawing.Point(873, 48);
             this.btnGo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(61, 28);
@@ -78,7 +82,7 @@ namespace MyWebBrowser
             // btnNewTab
             // 
             this.btnNewTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNewTab.Location = new System.Drawing.Point(949, 15);
+            this.btnNewTab.Location = new System.Drawing.Point(942, 48);
             this.btnNewTab.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNewTab.Name = "btnNewTab";
             this.btnNewTab.Size = new System.Drawing.Size(100, 28);
@@ -94,7 +98,7 @@ namespace MyWebBrowser
             this.tabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage.Name = "tabPage";
             this.tabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage.Size = new System.Drawing.Size(1025, 458);
+            this.tabPage.Size = new System.Drawing.Size(1021, 467);
             this.tabPage.TabIndex = 0;
             this.tabPage.Text = "tabPage1";
             this.tabPage.UseVisualStyleBackColor = true;
@@ -106,7 +110,7 @@ namespace MyWebBrowser
             this.webBrowser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.webBrowser.MinimumSize = new System.Drawing.Size(27, 25);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(1017, 450);
+            this.webBrowser.Size = new System.Drawing.Size(1013, 459);
             this.webBrowser.TabIndex = 0;
             // 
             // tabMan
@@ -115,27 +119,71 @@ namespace MyWebBrowser
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMan.Controls.Add(this.tabPage);
-            this.tabMan.Location = new System.Drawing.Point(16, 52);
+            this.tabMan.Location = new System.Drawing.Point(16, 81);
             this.tabMan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabMan.Name = "tabMan";
             this.tabMan.SelectedIndex = 0;
-            this.tabMan.Size = new System.Drawing.Size(1033, 487);
+            this.tabMan.Size = new System.Drawing.Size(1029, 496);
             this.tabMan.TabIndex = 5;
             // 
             // textUrl
             // 
             this.textUrl.FormattingEnabled = true;
-            this.textUrl.Location = new System.Drawing.Point(128, 17);
+            this.textUrl.Location = new System.Drawing.Point(16, 17);
             this.textUrl.Name = "textUrl";
-            this.textUrl.Size = new System.Drawing.Size(745, 24);
+            this.textUrl.Size = new System.Drawing.Size(1026, 24);
             this.textUrl.TabIndex = 6;
             this.textUrl.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textUrl_KeyPress);
+            // 
+            // btnDateDesc
+            // 
+            this.btnDateDesc.Location = new System.Drawing.Point(791, 51);
+            this.btnDateDesc.Name = "btnDateDesc";
+            this.btnDateDesc.Size = new System.Drawing.Size(75, 23);
+            this.btnDateDesc.TabIndex = 8;
+            this.btnDateDesc.Text = "Date ⬇";
+            this.btnDateDesc.UseVisualStyleBackColor = true;
+            this.btnDateDesc.Click += new System.EventHandler(this.btnDateDesc_Click);
+            // 
+            // btnDateAsc
+            // 
+            this.btnDateAsc.Location = new System.Drawing.Point(710, 52);
+            this.btnDateAsc.Name = "btnDateAsc";
+            this.btnDateAsc.Size = new System.Drawing.Size(75, 23);
+            this.btnDateAsc.TabIndex = 9;
+            this.btnDateAsc.Text = "Date ⬆";
+            this.btnDateAsc.UseVisualStyleBackColor = true;
+            this.btnDateAsc.Click += new System.EventHandler(this.btnDateAsc_Click);
+            // 
+            // btnVistsDesc
+            // 
+            this.btnVistsDesc.Location = new System.Drawing.Point(629, 52);
+            this.btnVistsDesc.Name = "btnVistsDesc";
+            this.btnVistsDesc.Size = new System.Drawing.Size(75, 23);
+            this.btnVistsDesc.TabIndex = 10;
+            this.btnVistsDesc.Text = "Visits ⬇";
+            this.btnVistsDesc.UseVisualStyleBackColor = true;
+            this.btnVistsDesc.Click += new System.EventHandler(this.btnVistsDesc_Click);
+            // 
+            // btnVisitsAsc
+            // 
+            this.btnVisitsAsc.Location = new System.Drawing.Point(548, 52);
+            this.btnVisitsAsc.Name = "btnVisitsAsc";
+            this.btnVisitsAsc.Size = new System.Drawing.Size(75, 23);
+            this.btnVisitsAsc.TabIndex = 11;
+            this.btnVisitsAsc.Text = "Visits ⬆";
+            this.btnVisitsAsc.UseVisualStyleBackColor = true;
+            this.btnVisitsAsc.Click += new System.EventHandler(this.btnVisitsAsc_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(1063, 590);
+            this.Controls.Add(this.btnVisitsAsc);
+            this.Controls.Add(this.btnVistsDesc);
+            this.Controls.Add(this.btnDateAsc);
+            this.Controls.Add(this.btnDateDesc);
             this.Controls.Add(this.textUrl);
             this.Controls.Add(this.tabMan);
             this.Controls.Add(this.btnNewTab);
@@ -162,6 +210,10 @@ namespace MyWebBrowser
         private System.Windows.Forms.TabControl tabMan;
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.ComboBox textUrl;
+        private System.Windows.Forms.Button btnDateDesc;
+        private System.Windows.Forms.Button btnDateAsc;
+        private System.Windows.Forms.Button btnVistsDesc;
+        private System.Windows.Forms.Button btnVisitsAsc;
     }
 }
 
