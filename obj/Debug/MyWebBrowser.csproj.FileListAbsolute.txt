@@ -27,3 +27,5 @@ C:\Users\MIDP9\source\repos\MyWebBrowser\bin\Debug\System.Text.Json.xml
 C:\Users\MIDP9\source\repos\MyWebBrowser\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\MIDP9\source\repos\MyWebBrowser\bin\Debug\System.ValueTuple.xml
 C:\Users\MIDP9\source\repos\MyWebBrowser\obj\Debug\MyWebBrowser.csproj.CopyComplete
+C:\Users\MIDP9\source\repos\MyWebBrowser\bin\Debug\Newtonsoft.Json.dll
+C:\Users\MIDP9\source\repos\MyWebBrowser\bin\Debug\Newtonsoft.Json.xml

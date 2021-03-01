@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -20,6 +21,8 @@ namespace MyWebBrowser
     public partial class Form1 : Form
     {
 
+        private string localDir = AppContext.BaseDirectory;
+
         WebBrowser webTab = null;
         History history = null;
         WriteHtml writeHtml = null;
@@ -33,16 +36,12 @@ namespace MyWebBrowser
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            webBrowser.Navigate(System.AppContext.BaseDirectory  + "links.html");
+            webBrowser.Navigate("https://www.google.com/");
             webBrowser.DocumentCompleted += WebBrowser_DocumentCompleted;
-
-            var list = new List<Visit>() { 
-                new Visit("This.com"),
-                new Visit("wtf.net")
-            };
-
-            binaries.Save("Data.xml", list);
-
+            if (history.VisitedUrls != null)
+            {
+                history.VisitedUrls.ForEach(Visit => textUrl.Items.Add(Visit.Url));
+            }
         }
 
         private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -52,23 +51,10 @@ namespace MyWebBrowser
 
         private void btnGo_Click(object sender, EventArgs e)
         {
-            WebBrowser web = tabMan.SelectedTab.Controls[0] as WebBrowser;
-            if ( web != null )
-            {
-                Regex isSearch = new Regex("^¿?([\\wáéíóú]+\\s?)+\\??$");
-                if (isSearch.IsMatch(textUrl.Text))
-                {
-                    web.Navigate($" http://www.google.com/search?q={textUrl.Text}");
-                    webBrowser.DocumentCompleted += WebBrowser_DocumentCompleted;
-                }
-                else
-                {
-                    textUrl.Text = NormalizeUrl(textUrl.Text);
-                    web.Navigate(textUrl.Text);
-                }
-            }
-            history.AddUrl(textUrl.Text);
+            go();
         }
+
+        
 
         private void btnNewTab_Click(object sender, EventArgs e)
         {
@@ -91,6 +77,9 @@ namespace MyWebBrowser
                 if ( web.CanGoBack )
                 {
                     web.GoBack();
+                    textUrl.Text = webBrowser.Url.ToString();
+                    history.AddUrl(textUrl.Text);
+                    loadUrls();
                 }
             }
         }
@@ -103,33 +92,47 @@ namespace MyWebBrowser
                 if ( web.CanGoForward )
                 {
                     webBrowser.GoForward();
+                    textUrl.Text = webBrowser.Url.ToString();
+                    history.AddUrl(textUrl.Text);
+                    loadUrls();
                 }
             }
         }
 
         private void textUrl_KeyPress(object sender, KeyPressEventArgs e)
         {
-         if ( e.KeyChar == (Char) 13)
+            if (e.KeyChar == (Char)13)
             {
-                WebBrowser web = tabMan.SelectedTab.Controls[0] as WebBrowser;
-                if ( web != null )
-                {
-                    Regex isSearch = new Regex("^¿?([\\wáéíóú]+\\s?)+\\??$");
-                    if ( isSearch.IsMatch(textUrl.Text))
-                    {
-                        textUrl.Text = $" http://www.google.com/search?q={textUrl.Text}";
-                        web.Navigate(textUrl.Text);
-                    }
-                    else
-                    {
-                        textUrl.Text = NormalizeUrl(textUrl.Text);
-                        web.Navigate(textUrl.Text);
-                    }
-                    history.AddUrl(textUrl.Text);
-                    
-                    }
-            }   
+                go();
+            }
         }
 
+        private void go()
+        {
+            WebBrowser web = tabMan.SelectedTab.Controls[0] as WebBrowser;
+            if (web != null)
+            {
+                Regex isSearch = new Regex("^¿?([\\wáéíóú]+\\s?)+\\??$");
+                if (isSearch.IsMatch(textUrl.Text))
+                {
+                    textUrl.Text = $"http://www.google.com/search?q={textUrl.Text}";
+                    web.Navigate(textUrl.Text);
+                    webBrowser.DocumentCompleted += WebBrowser_DocumentCompleted;
+                }
+                else
+                {
+                    textUrl.Text = NormalizeUrl(textUrl.Text);
+                    web.Navigate(textUrl.Text);
+                }
+            }
+            history.AddUrl(textUrl.Text);
+            loadUrls();
+        }
+
+        private void loadUrls()
+        {
+            textUrl.Items.Clear();
+            history.VisitedUrls.ForEach(visit => textUrl.Items.Add(visit.Url));
+        }
     }
 }

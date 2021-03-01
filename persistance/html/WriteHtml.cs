@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyWebBrowser.models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace MyWebBrowser.persistance
 ";
             
 
-        public static bool CreateHtmlFile(List<string> urls)
+        public static bool CreateHtmlFile(List<Visit> urls)
         {
             if (File.Exists(fileName))
             {
@@ -41,7 +42,7 @@ namespace MyWebBrowser.persistance
                 return true;
             }
         }
-        private static bool saveToFile(List<string> urls)
+        private static bool saveToFile(List<Visit> urls)
         {
             using (StreamWriter ws = new StreamWriter(fileName))
             {
@@ -52,7 +53,7 @@ namespace MyWebBrowser.persistance
                 ws.WriteLine("<main class=\"links\">");
                 ws.WriteLine("<h1>Links</h1>");
                 urls.ForEach(url => {
-                    ws.WriteLine($"<a href=\"{url}\">{url}</a>");
+                    ws.WriteLine($"<a href=\"{url.Url}\">{url.Url}</a>");
                 });
                 ws.WriteLine("</main>");
                 ws.WriteLine("</body>");

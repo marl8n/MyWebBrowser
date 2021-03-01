@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyWebBrowser.models;
+using MyWebBrowser.persistance.toFile;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,50 +11,44 @@ namespace MyWebBrowser.persistance
 {
     class History
     {
-        public const string fileName = "visitedUrls.txt";
-        public List<string> VisitedUrls { get; set; }
+        public const string fileName = "visitedUrls.json";
+        public List<Visit> VisitedUrls { get; set; }
         public History()
         {
-            VisitedUrls = new List<string>();
+            VisitedUrls = new List<Visit>();
             if (File.Exists(fileName))
             {
-                using (StreamReader sr = File.OpenText(fileName))
+                this.VisitedUrls = JsonToObjects.GetVisitsFromFile(fileName);
+                if (this.VisitedUrls == null)
                 {
-                    string s;
-                    while ( (s = sr.ReadLine()) != null )
-                    {
-                        VisitedUrls.Add(s);
-                    }
+                    VisitedUrls = new List<Visit>();
                 }
             } else
             {
-                using (StreamWriter sw = new StreamWriter(fileName))
-                {
-                    Console.WriteLine("File created");
-                }
+                File.Create(fileName);
+                this.VisitedUrls = new List<Visit>();
             }
         }
         
 
         public bool AddUrl(string url)
         {
-            this.VisitedUrls.Add(url);
-            //
-            SaveUrls();
-            return true;
-        }
+            if (this.VisitedUrls == null )
+            {
+                return false;
+            }
+            for (var i = 0; i < VisitedUrls.Count; i++ )
+            {
+                if ( VisitedUrls.ElementAt(i).Url == url )
+                {
+                    VisitedUrls.ElementAt(i).AddVisit();
+                    ObjectsToJson.SaveVisitsToFile(this.VisitedUrls, fileName);
+                    return true;
+                }
+            }
 
-        public bool SaveUrls()
-        {
-            if (File.Exists(fileName))
-            {
-                File.Delete(fileName);
-            }
-            using (StreamWriter sw = new StreamWriter(fileName) )
-            {
-                VisitedUrls.ForEach(sw.WriteLine);
-            }
-            WriteHtml.CreateHtmlFile(this.VisitedUrls);
+            this.VisitedUrls.Add(new Visit(url));
+            ObjectsToJson.SaveVisitsToFile(this.VisitedUrls, fileName);
             return true;
         }
     }
